@@ -3,3 +3,17 @@ button{
     background-color:rgb(1, 160, 160);
     color:white;
 }
+form{
+    float:right;
+}
+p{
+    background-color:rgb(1, 160, 160);
+    color:white;
+    width: 88px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+#gifs-return{
+    margin-top: 20px;
+}

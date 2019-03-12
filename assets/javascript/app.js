@@ -14,13 +14,12 @@ $(document).ready(function () {
             a.attr("data-name", topics[i]);
             a.text(topics[i]);
             $("#topics-view").append(a);
-            console.log(topics[i]);
+
         }
     }
     $("#add-topic").on("click", function (event) {
         event.preventDefault();
         var topic = $("#topic-input").val().trim();
-        console.log(topic);
         topics.push(topic);
         $("#topic-input").val("");
 
@@ -29,16 +28,15 @@ $(document).ready(function () {
     topicButtons();
 
     $(document).on("click", "button", function () {
-        console.log(this);
         var topicCategory = $(this).attr("data-name")
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicCategory + "&api_key=dc6zaTOxFJmzC&limit=10";
-        console.log("button pushed" + topicCategory);
         $.ajax({
             url: queryURL,
             method: "GET"
         })
             .then(function (response) {
                 var results = response.data;
+                console.log(results);
                 for (var i = 0; i < results.length; i++) {
                     if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                         var gifDiv = $("<div>");
