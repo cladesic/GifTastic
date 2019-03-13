@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
     var topics = ["work", "computer", "games", "programing", "happy", "trucks"];
+    var still = [];
+    var active =[];
+
 
     function topicButtons() {
 
@@ -36,21 +39,40 @@ $(document).ready(function () {
         })
             .then(function (response) {
                 var results = response.data;
-                console.log(results);
+             //   console.log(results);
                 for (var i = 0; i < results.length; i++) {
                     if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                         var gifDiv = $("<div>");
                         var rating = results[i].rating;
                         var p = $("<p>").text("Rating: " + rating);
                         var topicImage = $("<img>");
-                        topicImage.attr("src", results[i].images.fixed_height.url);
+                        topicImage.attr("src", results[i].images.fixed_height_still.url); 
+                        still= results[i].images.fixed_height_still.url; 
+                        active= results[i].images.fixed_height.url;     
                         gifDiv.append(p);
                         gifDiv.append(topicImage);
                         $("#gifs-return").prepend(gifDiv);
+                       //console.log(still);
+                      // console.log(topicImage);
                     }
+                    
                 }
+                
             });
     });
-
+    $(document).on("click", "img", function () {
+       var src = still;
+        if (still !== "s.gif"){
+          $(this).attr('src', src.replace(still, active));
+            src = active;
+          // console.log("Made it to if statement" + this);
+       }else 
+       $(this).attr('src', src.replace(active, still));
+        src = still;
+       //console.log("else statement");
+       
+       
+    
+    });
 
 });
